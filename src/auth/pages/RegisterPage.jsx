@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Link, Grid, TextField, Typography } from "@mui/material"
+import { Button, Link, Grid, TextField, Typography, Alert } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startCreatingUserWithEmailAndPassword } from "../../store/auth/thunks";
 
 
@@ -27,6 +27,10 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const { status, errorMessage } = useSelector( state => state.auth )
+  //para que no este constantemente preguntando si esta autenticado
+  const isCheckingAuth = useMemo( () => status === 'checking', [status] )
 
   const { formState, displayName, email, password, confirmPass, onInputChange, 
           isFormValid, displayNameValid, emailValid, passwordValid, confirmPassValid
@@ -96,10 +100,25 @@ export const RegisterPage = () => {
 
         {/* Buttons */}
         <Grid container
-          spacing={2}
-          sx={{marginTop: 1, marginBottom: 2}}>
-            <Grid item xs={12} sm={6}>
-              <Button variant="contained" fullWidth type="submit">
+              spacing={2}
+              sx={{marginTop: 1, marginBottom: 2}}>
+            <Grid item 
+                  xs={12} 
+                  sx={{
+                    display: (errorMessage) 
+                      ? '' 
+                      : 'none'
+            }}>
+              <Alert severity="error">
+                {errorMessage}
+              </Alert>
+            </Grid>
+            <Grid item xs={12}>
+              <Button variant="contained" 
+                      fullWidth 
+                      type="submit"
+                      disabled={isCheckingAuth}
+              >
                 Registrarme
               </Button>
             </Grid>
