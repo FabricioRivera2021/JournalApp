@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { registerWithEmailAndPassword, signInWithGoogle } from "../../firebase/providers"
+import { loginWithEmailAndPassword, registerWithEmailAndPassword, signInWithGoogle } from "../../firebase/providers"
 import { checkingCredentials, login, logout } from "./authSlice"
 
 export const checkingAuthentication = (email, password) => {
@@ -35,5 +35,19 @@ export const startCreatingUserWithEmailAndPassword = ({email, password, displayN
         // console.log(resp)
 
         dispatch(login({uid, displayName, email, photoURL}));
+    }
+}
+
+export const startLoginWithEmailAndPassword = ({email, password}) => {
+    return async(dispatch) => {
+
+        dispatch(checkingCredentials())
+
+        const {ok, uid, displayName, photoURL, errorMessage} = await loginWithEmailAndPassword({email, password});
+        // console.log(resp)
+
+        if(!ok) return dispatch( logout( {errorMessage} ) );
+
+        dispatch( login({ uid, displayName, email, photoURL }) )
     }
 }

@@ -1,20 +1,20 @@
 import { useMemo } from "react";
 import { Google } from "@mui/icons-material"
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
+import { startGoogleSignIn, startLoginWithEmailAndPassword } from '../../store/auth'
 import { useDispatch, useSelector } from "react-redux";
 
 
 
 export const LoginPage = () => {
 
-  const { status } = useSelector(state => state.auth)
+  const { status, errorMessage } = useSelector(state => state.auth)
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
+  const { formState, email, password, onInputChange } = useForm({
     email: "fabricio.rivera2012@gmail.com",
     password: "12345"
   })
@@ -24,8 +24,8 @@ export const LoginPage = () => {
   const onSubmit = (e)=>{
     e.preventDefault();
 
-    dispatch(checkingAuthentication());
-    console.log({email, password});
+    dispatch(startLoginWithEmailAndPassword(formState));
+    // console.log({email, password});
   }
 
   const onGoogleSignIn = ()=> {
@@ -50,6 +50,19 @@ export const LoginPage = () => {
             <Grid container
               spacing={2}
               sx={{marginTop: 1, marginBottom: 2}}>
+                <Grid item xs={12}>
+                  <Alert 
+                    severity="error"
+                    xs={12} 
+                    sx={{
+                      display: (errorMessage) 
+                        ? '' 
+                        : 'none'
+                      }}
+                  >
+                    { errorMessage }
+                  </Alert>
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <Button variant="contained" fullWidth type="submit" disabled={isAuthenticating} /*si esta checkeando el login se deshabilita el boton*/ >
                     Login
