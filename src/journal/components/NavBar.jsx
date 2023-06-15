@@ -1,9 +1,18 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material"
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material"
+import { useDispatch } from "react-redux"
+import { logoutFromFirebase } from "../../store/auth";
 
 
 // eslint-disable-next-line react/prop-types
 export const NavBar = ({ drawerWidth }) => {
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logoutFromFirebase());
+  }
+
   return (
     <AppBar position="fixed"
             sx={{ 
@@ -26,7 +35,9 @@ export const NavBar = ({ drawerWidth }) => {
              alignItems='center'
             >
                 <Typography variant="h6" noWrap component='div'>Journal App</Typography>
-                <IconButton color='error'>
+                <IconButton 
+                    color='error'
+                    onClick={onLogout}>
                     <LogoutOutlined/>
                 </IconButton>
 

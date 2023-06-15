@@ -1,11 +1,15 @@
 import { TurnedInNot } from "@mui/icons-material"
 import { Box, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
+import { useSelector } from "react-redux"
 
 
 
 // eslint-disable-next-line react/prop-types
 export const SideBar = ({drawerWidth}) => {
-  return (
+
+    const { displayName } = useSelector(state => state.auth)
+
+    return (
     <Box
         component='nav'
         sx={{
@@ -27,7 +31,7 @@ export const SideBar = ({drawerWidth}) => {
 
             <Toolbar>
                 <Typography variant="h6" noWrap component='div'>
-                    Hola mundo
+                    {displayName}
                 </Typography>
             </Toolbar>
 
