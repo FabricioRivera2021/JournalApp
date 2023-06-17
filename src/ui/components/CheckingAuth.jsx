@@ -21,12 +21,7 @@ export const CheckingAuth = () => {
             direction='row'
             justifyContent='center'
             alignItems='center'
-            backgroundColor='white'
-            border='2px'
-            sx={{width: {sm: 450},
-                 height: {sm: 200},
-                 borderRadius: 3,
-                 opacity: 0.7}}>
+            >
                 <CircularProgress
                   sx={{opacity: 1}} 
                   color="warning" />

@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { TurnedInNot } from "@mui/icons-material"
 import { Box, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
+import { NavItem } from "./"
 
 
 
@@ -8,6 +10,7 @@ import { useSelector } from "react-redux"
 export const SideBar = ({drawerWidth}) => {
 
     const { displayName } = useSelector(state => state.auth)
+    const { notes } = useSelector(state => state.journal)
 
     return (
     <Box
@@ -37,27 +40,12 @@ export const SideBar = ({drawerWidth}) => {
 
             <List>
                 {
-                    ['Enero','Febrero','Marzo','Abril'].map( text => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <TurnedInNot />
-                                </ListItemIcon>
-                                <Grid
-                                    container
-                                >
-                                    <ListItemText primary={text} />
-                                    <ListItemText secondary={ 'Lorem ipsun sit amen y la puta que te pario' } />
-                                </Grid>
-                            </ListItemButton>
-                        </ListItem>
-                    ) )
+                    notes.map( note => (
+                        <NavItem key={note.id} note={note} />
+                    ))
                 }
             </List>
-
         </Drawer>
-
-
     </Box>
   )
 }
