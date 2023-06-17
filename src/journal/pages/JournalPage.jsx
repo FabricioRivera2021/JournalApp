@@ -27,7 +27,7 @@ export const JournalPage = () => {
       { 
         // eslint-disable-next-line no-extra-boolean-cast
         (!!active) 
-        ?  <NoteView />
+        ?  <NoteView key={active.id} active={active} />
         :  <NothingSelectedView />
       }
 

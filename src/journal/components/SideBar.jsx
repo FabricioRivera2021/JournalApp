@@ -4,8 +4,6 @@ import { Box, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListIt
 import { useSelector } from "react-redux"
 import { NavItem } from "./"
 
-
-
 // eslint-disable-next-line react/prop-types
 export const SideBar = ({drawerWidth}) => {
 
@@ -41,7 +39,7 @@ export const SideBar = ({drawerWidth}) => {
             <List>
                 {
                     notes.map( note => (
-                        <NavItem key={note.id} note={note} />
+                        <NavItem key={note.id} {...note} />
                     ))
                 }
             </List>

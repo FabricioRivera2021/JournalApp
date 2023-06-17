@@ -1,8 +1,21 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { ImageGallery } from "../components";
+import { useSelector } from "react-redux";
+import { useForm } from "../../hooks/useForm";
+import { useMemo } from "react";
 
 export const NoteView = () => {
+
+          //note es el alias de active
+  const { active: note } = useSelector( state => state.journal );
+
+  const { body, title, date, onInputChange, formState } = useForm(note);
+
+  // const newDate = useMemo(  )
+
   return (
     <Grid
       container
@@ -13,7 +26,7 @@ export const NoteView = () => {
     >
       <Grid item>
         <Typography fontSize={39} fontWeight="light">
-          28 de Agosto, 2023
+          LALA
         </Typography>
       </Grid>
       <Grid item>
@@ -33,6 +46,9 @@ export const NoteView = () => {
           variant="filled"
           fullWidth
           label="Titulo"
+          name="title"
+          value={title}
+          onChange={onInputChange}
           sx={{
             border: "none",
             mb: 1,
@@ -44,6 +60,9 @@ export const NoteView = () => {
           fullWidth
           multiline
           label="Notas"
+          value={body}
+          name="body"
+          onChange={onInputChange}
           minRows={5}
           sx={{
             border: "none",

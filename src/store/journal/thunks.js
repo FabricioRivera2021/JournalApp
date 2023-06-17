@@ -7,7 +7,6 @@ import { loadNotes } from "../../helpers/loadNotes"
 
 
 export const startNewNote = () => {
-
     return async(dispatch, getState) => {
 
         dispatch( creatingNewNote() )
