@@ -1,20 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
+
 import { ImageGallery } from "../components";
-import { useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
-import { useMemo } from "react";
+import { setActiveNote } from "../../store/journal/journalSlice";
+import { startSavingNote } from "../../store/journal/thunks";
 
 export const NoteView = () => {
+
+  const dispatch = useDispatch();
 
           //note es el alias de active
   const { active: note } = useSelector( state => state.journal );
 
   const { body, title, date, onInputChange, formState } = useForm(note);
 
-  // const newDate = useMemo(  )
+  const dateString = useMemo(() => {
+    const newDate = new Date(date);
+    return newDate.toLocaleString();
+  }, [date]);
+  
+  useEffect(() => {
+    dispatch(setActiveNote(formState))
+  }, [formState])
+
+  const onSaveNote = () => {
+    dispatch( startSavingNote() );
+  }
+
 
   return (
     <Grid
@@ -26,11 +45,14 @@ export const NoteView = () => {
     >
       <Grid item>
         <Typography fontSize={39} fontWeight="light">
-          LALA
+          { dateString }
         </Typography>
       </Grid>
       <Grid item>
-        <Button color="primary" sx={{ padding: 2 }}>
+        <Button 
+          onClick={ onSaveNote }
+          color="primary" 
+          sx={{ padding: 2 }}>
           <SaveOutlined
             sx={{
               fontSize: 30,

@@ -30,13 +30,25 @@ export const journalSlice = createSlice({
         },
         setNotes: (state, action) => {
             // console.log(action.payload.id)
-            state.notes.push( action.payload );
+            //el anterior con push tenia el problema de duplicar
+            //las notas este metodo no
+            state.notes = action.payload;
         },
         setSaving: (state) => {
-
+            state.isSaving = true;
         },
         updateNote: (state, action) => {
-
+            state.isSaving = false;
+            /**------------------------------------------ */
+            state.notes = state.notes.map(
+                note => {
+                    if(note.id === action.payload.id){
+                        return action.payload;
+                    }
+                    return note;//imprtante este return
+                }
+            )
+            /**------------------------------------------ */
         },
         deleteNoteById: (state, action) => {
 

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { TurnedInNot } from "@mui/icons-material"
-import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 import { useMemo } from "react"
 import { useDispatch } from "react-redux"
+import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import { TurnedInNot } from "@mui/icons-material"
 import { setActiveNote } from "../../store/journal/journalSlice"
 
 export const NavItem = ({ title = '', body, id, date, imageUrls = [] }) => {
