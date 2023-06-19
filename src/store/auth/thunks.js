@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { loginWithEmailAndPassword, logoutFirebase, registerWithEmailAndPassword, signInWithGoogle } from "../../firebase/providers"
+import { clearNotesOnLogout } from "../journal/journalSlice"
 import { checkingCredentials, login, logout } from "./authSlice"
 
 export const checkingAuthentication = (email, password) => {
@@ -57,6 +58,7 @@ export const logoutFromFirebase = () => {
 
         await logoutFirebase();
 
+        dispatch(clearNotesOnLogout());
         dispatch(logout());
 
     }

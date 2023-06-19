@@ -17,12 +17,13 @@ export const SideBar = ({drawerWidth}) => {
              width: { sm: drawerWidth },
              flexShrink: { sm: 0 }
             }}
+            color='dod'
     >
         <Drawer
             variant="permanent" //permanent - temorary
             open //open - closed
             sx={{
-                display: { xs: 'none', sm: 'block' },
+                display: { xs:'none', sm: 'block' },
                 '& .MuiDrawer-paper': {
                     boxSizing: 'border-box',
                     width: drawerWidth
