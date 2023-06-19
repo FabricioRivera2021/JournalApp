@@ -44,7 +44,7 @@ export const LoginPage = () => {
               <TextField label='Correo' type='email' placeholder="Correo@correo.com" name="email" value={ email } onChange={onInputChange} fullWidth/>
             </Grid>
             <Grid item xs={12}>
-              <TextField label='Contraseña' type='password' name="password" value={password} onChange={onInputChange} fullWidth/>
+              <TextField label='Contraseña' type='password' name="password" autoComplete="on" value={password} onChange={onInputChange} fullWidth/>
             </Grid>
 
             {/* Buttons */}
