@@ -33,7 +33,7 @@ export const startNewNote = () => {
         console.log(newNote)
 
         dispatch( addNewEmptyNote( newNote ) )
-        dispatch( setActiveNote( newNote ) )
+        // dispatch( setActiveNote( newNote ) )
         //dispatch (activeNote)
     }
 
