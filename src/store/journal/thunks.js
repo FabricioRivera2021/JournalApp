@@ -19,22 +19,17 @@ export const startNewNote = () => {
             date: new Date().getTime(),
             imageUrls: []
         }
-        console.log(newNote)
 
         //Pide la base de datos y el path
         const newDoc = doc( collection( FirebaseDB, `${uid}/journal/notes` ) );
         
         //luego pide eñ path y le pasamos la nota a guardar
-        /*const resp =*/ await setDoc( newDoc, newNote );     
-        // console.log({newDoc, resp})
+        await setDoc( newDoc, newNote );
 
         newNote.id = newDoc.id;
 
-        console.log(newNote)
-
         dispatch( addNewEmptyNote( newNote ) )
-        // dispatch( setActiveNote( newNote ) )
-        //dispatch (activeNote)
+        dispatch( setActiveNote( newNote ) )
     }
 
 }
