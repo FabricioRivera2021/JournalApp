@@ -6,12 +6,13 @@ import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui
 import { TurnedInNot } from "@mui/icons-material"
 import { setActiveNote } from "../../store/journal/journalSlice"
 
-export const NavItem = ({ title = '', body, id, date, imageUrls = [], toggleSideBar, sideBar }) => {
+export const NavItem = ({ title = '', body, id, date, imageUrls = [], toggleSideBar}) => {
 
     const dispatch = useDispatch();
 
+    // console.log(imageUrls)
+
     const onClick = () => {
-        toggleSideBar();
         dispatch(setActiveNote({
             id,
             title,
@@ -19,6 +20,7 @@ export const NavItem = ({ title = '', body, id, date, imageUrls = [], toggleSide
             date,
             imageUrls
         }))
+        toggleSideBar();
     }
 
     const newTitle = useMemo( () => {

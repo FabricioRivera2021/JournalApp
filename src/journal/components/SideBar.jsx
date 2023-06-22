@@ -14,7 +14,7 @@ export const SideBar = ({drawerWidth, sideBar, toggleSideBar}) => {
     const { displayName } = useSelector(state => state.auth)
     const { notes } = useSelector(state => state.journal)
 
-    // console.log(sideBar)
+    // console.log(notes)
 
     return (
     <Box

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material";
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks/useForm";
@@ -80,12 +80,13 @@ export const NoteView = () => {
           onChange={onFileInputChange}
           style={{display: 'none'}}/>
 
-        <IconButton
+        <Button
           color="primary"
           disabled={ isSaving }
           onClick={ () => fileInputRef.current.click() }>
           <UploadOutlined />
-        </IconButton>
+          Subir imagen
+        </Button>
 
         <Button 
           disabled={ isSaving }
@@ -114,6 +115,7 @@ export const NoteView = () => {
           name="title"
           value={title}
           onChange={onInputChange}
+          autoFocus
           sx={{
             border: "none",
             mb: 1,

@@ -17,7 +17,9 @@ export const startNewNote = () => {
             title: '',
             body: '',
             date: new Date().getTime(),
+            imageUrls: []
         }
+        console.log(newNote)
 
         //Pide la base de datos y el path
         const newDoc = doc( collection( FirebaseDB, `${uid}/journal/notes` ) );
@@ -27,6 +29,8 @@ export const startNewNote = () => {
         // console.log({newDoc, resp})
 
         newNote.id = newDoc.id;
+
+        console.log(newNote)
 
         dispatch( addNewEmptyNote( newNote ) )
         dispatch( setActiveNote( newNote ) )
@@ -44,7 +48,6 @@ export const startLoadingNotes = () => {
         
         
         dispatch( setNotes(notes) )
-        
     }
 }
 
