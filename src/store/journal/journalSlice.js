@@ -29,6 +29,9 @@ export const journalSlice = createSlice({
             state.active = action.payload;
             // state.messageSaved = '';
         },
+        cleanMessageSaved: (state, action) => {
+            state.messageSaved = '';
+        },
         setNotes: (state, action) => {
             // console.log(action.payload.id)
             //el anterior con push tenia el problema de duplicar
@@ -85,5 +88,6 @@ export const {
     updateNote,
     deleteNoteById,
     setPhotosToActiveNote,
-    clearNotesOnLogout
+    clearNotesOnLogout,
+    cleanMessageSaved
     } = journalSlice.actions

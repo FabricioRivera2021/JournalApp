@@ -9,7 +9,7 @@ import { Button, Grid, TextField, Typography } from "@mui/material";
 
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks/useForm";
-import { setActiveNote } from "../../store/journal/journalSlice";
+import { cleanMessageSaved, setActiveNote } from "../../store/journal/journalSlice";
 import { startDeletingNote, startSavingNote, startUploadingFiles } from "../../store/journal/thunks";
 
 import Swal from "sweetalert2";
@@ -39,7 +39,11 @@ export const NoteView = () => {
     if(messageSaved.length > 0){
       Swal.fire('Nota actualizada', messageSaved, 'success');
     }
+    return () => {
+      dispatch(cleanMessageSaved())
+    }
   }, [messageSaved])
+  
   
 
   const onSaveNote = () => {
